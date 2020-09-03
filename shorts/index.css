@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #fcfcf3;
+    text-align: center;
+    overflow-y: hidden;
+}
+
+#root {
+    min-height: 100vh;
+    margin-bottom: -55px;
+}
+
+.address {
+    width: 168px;
+    height: 30px;
+    border: 0 0 1px 0;
+}
+
+.submit {
+    width: 129px;
+    height: 35px;
+}
+
+hr {
+    border: 1px solid lightgrey;
+    width: 90%;
+}
+
+.kyi-text {
+    font-style: italic;
+}
+
+form {
+    margin-top: 30px;
+}
+
+footer {
+    height: 16px;
+    color: grey;
+}

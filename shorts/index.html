@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+    <link rel="shortcut icon" href="https://kyism.ga/public/img/kyi_192x192.png" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+
+    <title>Shorts | Know Your ISM</title>
+</head>
+
+<body>
+    <div id="root">
+    <h2> SHORTS </h2>
+    <h4> THE <span class="kyi-text">KNOW YOUR ISM</span> URL SHORTENER </h4>
+    <hr />
+    <form action="https://kyi.herokuapp.com/api/shorts" method="post" id="shortener-form" style="padding: 10px; margin-left: auto; margin-right: auto;">
+        <input type="text" name="url" class="address" id="target-url" autocomplete="off" required>
+        <input type="submit" class="submit" value="Get Shortened URL">
+    </form>
+
+    <div>
+        <span id="response-area" style="padding: 10px; font-family: monospace; margin-left: auto; margin-right: auto;"></span>
+    </div>
+    </div>
+    <footer>
+        <i>This page is a part of the Know Your ISM Services Suite.</i>
+    </footer>
+
+    <script>
+    let $form = document.querySelector("#shortener-form"),
+        $responseArea = document.querySelector("#response-area"),
+        $targetURL = document.querySelector("#target-url");
+
+    window.addEventListener("load", function () {
+        $targetURL.focus();
+
+        function getShorts() {
+            const XHR = new XMLHttpRequest();
+
+            XHR.open($form.method, $form.action, true);
+
+            XHR.addEventListener("load", function (event) {
+                let res = JSON.parse(event.target.response);
+                console.log(res);
+                $responseArea.innerHTML = res.errors ? "Oops! Something went wrong." : null || `<a href="http://${res.shortURL}" rel="noreferrer noopener" target="_blank">${res.shortURL}</a>`;
+            });
+
+            XHR.addEventListener("error", function (event) {
+                $responseArea.innerHTML = 'Oops! Something went wrong.';
+            });
+
+            let data = {};
+            data.url = $targetURL.value;
+
+            XHR.setRequestHeader("Content-Type", "application/json");
+
+            XHR.send(JSON.stringify(data));
+
+            $responseArea.innerHTML = "Creating...";
+        }
+
+        $form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            getShorts();
+        });
+    });
+    </script>
+</body>
+
+</html>

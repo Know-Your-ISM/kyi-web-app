@@ -1,0 +1,129 @@
+*{
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+  background-image: linear-gradient(to right,  #f8f8f8 5%, #ffffff 100%);
+  font-size: larger;
+  line-height: 1.5em;
+}
+
+header{
+  /* width: 100%; */
+  padding: 1px 3vw 10px 3vw;
+  /* padding: 5px; */
+  background-image:linear-gradient(#ace5ff 10%,#e1f5fe 100%);
+  border-bottom: 2px auto solid;
+  margin-bottom: 20px;
+  
+}
+
+.main{
+  width: 60%;
+  margin: auto;
+  padding-left: 30px;
+  border-left: 3px #000 solid;
+}
+
+header h1{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  /* text-decoration: underline; */
+  color:  blue ;
+  padding: 65px;
+  margin: 0 0 15px 0 ;
+  width: 100;
+  background-color: rgb(238, 255, 252);
+  border: 3px #000 solid;
+  box-shadow: 0 0 5px #000;
+  line-height: 1.2em;
+}
+
+#heading #your{
+  color: green;
+}
+
+#heading #terms-and-conditions{
+  text-decoration: underline #000 2px double ;
+  color: rgb(95, 95, 95);
+}
+
+.last-edited{
+  font-style: italic;
+  text-align: right;
+  color: grey;
+  margin-right: 15px; 
+  transform: translateY(-250%);
+}
+
+.main h1{
+  color: #fff;
+  background-image:linear-gradient(to right, rgb(38, 38, 136), rgb(83, 83, 167), #fff);
+  padding:20px 20px;
+  margin-left: 0;
+  line-height: 1.2em;
+}
+
+
+.main h2{
+  color: rgb(72, 150, 177);
+}
+
+a{
+  font-weight: bolder;
+  text-decoration: none;
+  color: rgb(44, 156, 194);
+}
+a:hover{
+  color: blue;
+}
+
+strong, h3{
+  color:rgb(39, 160, 39);
+}
+
+ul{
+  list-style: none;
+}
+
+.bulleted-list{
+  list-style: disc;
+}
+
+img#back-to-top{
+  position: fixed;
+  bottom: 40px;
+  right: -10%;
+  height: 45px;
+  opacity: 0.6;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+img#back-to-top:hover{
+  opacity: 1;
+}
+
+@media(max-width:600px){
+  .main{
+      width: 80%;
+  }
+  #back-to-top{
+      display: none;
+  }
+
+  body{
+      font-size: medium;
+  }
+
+  .main h1{
+      font-size: x-large;
+  }
+
+  #heading {
+    font-size: 35px;
+  }
+}

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Know Your ISM | Web</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="shortcut icon" href="public/img/kyi_logo_2.png" type="image/x-icon">
+    <link rel="manifest" crossorigin="use-credentials" href="public/manifest.json" />
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Know Your ISM">
+    <meta name="apple-mobile-web-app-title" content="Know Your ISM">
+    <meta name="theme-color" content="#46a049">
+    <meta name="msapplication-navbutton-color" content="#d3d3d3">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#46a049">
+    <meta name="msapplication-starturl" content="index.html">
+    <meta property="og:title" content="Know Your ISM"/>
+    <meta property="og:url" content="https://www.kyism.ga/"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Know Your ISM |KYI"/>
+    <meta property="og:description" content="Find any student in IIT (ISM)."/>
+    <meta property="og:image" content="https://kyism.ga/public/img/kyi_512x512.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="Find any student in IIT (ISM). Web App for Know Your ISM.">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords"
+        content="search, kyi, ism, iitism, iit, dhanbad, know, your, name, place, branch, clubs, intro">
+    <meta name="author" content="Know Your ISM Team">
+
+    <link rel="icon" sizes="192x192" href="/public/img/kyi_192x192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/public/img/kyi_192x192.png">
+    <link rel="icon" sizes="500x500" href="/public/img/kyi_512x512.png">
+    <link rel="apple-touch-icon" sizes="500x500" href="/public/img/kyi_500x500.png">
+    <link rel="icon" sizes="512x512" href="/public/img/kyi_512x512.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/public/img/kyi_512x512.png">
+</head>
+
+<body>
+    <div id="root">
+        <div id="overlay"> <a id="overlay-close-btn">&times;</a>
+            <div id="overlay-text"></div>
+            <div class="loader-wrap" id="loader-wrap">
+                <div id="loader"></div>
+            </div>
+            <div id="overlay-card-wrapper">
+                <div id="overlay-card"></div>
+            </div>
+        </div>
+        <div id="modal" class="modal">
+            <div class="modal-content"> <span class="modal-close-btn">&times;</span>
+                <div class="modal-html"></div>
+            </div>
+        </div>
+        <div class="header"> <img id="logo" src="public/img/kyi_logo_2.png" alt="logo">
+            <div class="logo-text tooltip">
+                <span class="tooltiptext">The Homepage of KYI</span>
+                <span>
+                    <h2 id="logo-h2">Know <span id="logo-text-your">Your</span> ISM</h2>
+                </span>
+            </div>
+            <form id="search_bar_and_images" class="search-form"> <input class="search1" id="search-bar" type="text"
+                    placeholder="Name/Admission number"> 
+                <button class="search-btn" id="search-submit-btn" type="submit"> 
+                    <i class="search_images fa fa-search" id="search-icon"></i> 
+                </button> 
+                <button class="search-btn" id="search-dark-btn"> 
+                    <i class="search_images fa fa-moon-o" id="moon-icon"></i>
+                </button> 
+                <button class="search-btn" id="search-bkmrk-btn"> 
+                    <i class="search_images fa fa-bookmark-o" id="bkmrk-icon"></i>
+                </button> 
+                <button class="search-btn" id="search-clear-btn"> <span class="search_images"> &times; </span>
+                </button>
+                <div class="alerts" id="alerts"></div>
+            </form>
+        </div>
+        <div class="sidebar">
+            <form> <span class="filter_label">
+                    <p>Filter by:</p>
+                </span>
+                <div class="sidebar_content">
+                    <div class="all_selects"> <label for="course">Course:</label> <select name="course" id="course">
+                            <option value="" class="none-selected"></option>
+                            <option value="btech">Undergraduate / Undergraduate + Post-Graduate</option>
+                            <option value="mtech">Post-Graduate / PhD</option>
+                        </select> <label for="branch" class="disabled-label">Branch:</label> <select name="branch"
+                            id="branch" disabled="true">
+                            <option value="" class="none-selected"></option>
+                            <option value="1">Chemical Engineering</option>
+                            <option value="2">Civil Engineering</option>
+                            <option value="3">Computer Science and Engineering</option>
+                            <option value="4">Electrical Engineering</option>
+                            <option value="5">Electronics and Communication Engineering</option>
+                            <option value="6">Engineering Physics</option>
+                            <option value="7">Environmental Physics</option>
+                            <option value="8">Mechanical Engineering</option>
+                            <option value="9">Mineral and Metallurgical Engineering</option>
+                            <option value="10">Mining Engineering</option>
+                            <option value="11">Mining Machinery Engineering</option>
+                            <option value="12">Petroleum Engineering</option>
+                            <option value="13">Mathematics and Computing</option>
+                            <option value="14">Applied Geology</option>
+                            <option value="15">Applied Geophysics</option>
+                        </select><label for="state" class="disabled-label">State/Union Territory:</label> <select
+                            name="state" id="state" disabled="true">
+                            <option value="" class="none-selected"></option>
+                            <option value="1">Andaman And Nicobar Islands</option>
+                            <option value="2">Andhra Pradesh</option>
+                            <option value="3">Arunachal Pradesh</option>
+                            <option value="4">Assam</option>
+                            <option value="5">Bihar</option>
+                            <option value="6">Chandigarh</option>
+                            <option value="7">Chhattisgarh</option>
+                            <option value="8">Dadra and Nagar Haveli & Daman and Diu</option>
+                            <option value="9">Delhi-NCR</option>
+                            <option value="10">Goa</option>
+                            <option value="11">Gujarat</option>
+                            <option value="12">Haryana</option>
+                            <option value="13">Himachal Pradesh</option>
+                            <option value="14">Jammu and Kashmir</option>
+                            <option value="15">Jharkhand</option>
+                            <option value="16">Karnataka</option>
+                            <option value="17">Kerala</option>
+                            <option value="18">Ladakh</option>
+                            <option value="19">Lakshwadeep</option>
+                            <option value="20">Madhya Pradesh</option>
+                            <option value="21">Maharashtra</option>
+                            <option value="22">Manipur</option>
+                            <option value="23">Meghalaya</option>
+                            <option value="24">Mizoram</option>
+                            <option value="25">Nagaland</option>
+                            <option value="26">Odisha</option>
+                            <option value="27">Puducherry</option>
+                            <option value="28">Punjab</option>
+                            <option value="29">Rajasthan</option>
+                            <option value="30">Sikkim</option>
+                            <option value="31">Tamil Nadu</option>
+                            <option value="32">Telangana</option>
+                            <option value="33">Tripura</option>
+                            <option value="34">Uttar Pradesh</option>
+                            <option value="35">Uttarakhand</option>
+                            <option value="36">West Bengal</option>
+                        </select><label for="house">House:</label> <select name="house" id="house">
+                            <option value="" class="none-selected"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select><label for="club" class="disabled-label">Club:</label> <select name="club" id="club"
+                            disabled="true">
+                            <option value="" class="none-selected"></option>
+                            <option value="1">Abhay Dramatics Club</option>
+                            <option value="2">Arka</option>
+                            <option value="3">Artfreaks</option>
+                            <option value="4">Book Club</option>
+                            <option value="5">Chayanika Sangh</option>
+                            <option value="6">Cyberlabs</option>
+                            <option value="7">E-cell</option>
+                            <option value="8">Fotofreaks</option>
+                            <option value="9">Legends in the Making (LITM)</option>
+                            <option value="10">Lights Camera ISM (LCI)</option>
+                            <option value="11">Literature Club (LitC)</option>
+                            <option value="12">Mechismu</option>
+                            <option value="13">Mic Drop Toastmasters</option>
+                            <option value="14">Quiziappa</option>
+                            <option value="15">RoboISM</option>
+                            <option value="16">Rhythm Club</option>
+                            <option value="17">Udaan</option>
+                            <option value="18">We The Crew (WTC)</option>
+                            <option value="19">Fast Forward India (FFI)</option>
+                            <option value="20">Kartavya</option>
+                            <option value="21">Mailer Daemon</option>
+                        </select></div>
+                    <div class="filter_buttons">
+                        <a href="#" id="mobile-dark-btn" class="filter-btn"> <span type="button" class="fa fa-moon-o" id="mobile-dark-icon" name="mobile-dark-btn"></span></a>
+                        <a href="#" class="filter-btn"> <input type="button" id="clear_filters" name="clear_filters" value="Clear Filters"></a>
+                        <a href="#" id="mobile-bkmrk-btn" class="filter-btn"> <span type="button" class="fa fa-bookmark-o" id="mobile-bkmrk-icon" name="mobile-bkmrk-btn"></span></a>
+                    </div>
+                    <hr class="sidebar-hr" />
+                    <div class="other-sites-block inline-block">
+                        <a href="blog" class="fa fa-newspaper-o tooltip other-sites"> <span class="small-text"><div>KYI BLOG</div></span><span class="tooltiptext small-text" id="blog-tooltip">The Blog</span></a>
+                        <a href="pixels" class="fa fa-picture-o tooltip other-sites"> <span class="small-text"><div>KYI PIXELS</div></span><span class="tooltiptext small-text" id="pixels-tooltip">The Photo Gallery</span> </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="right" id="right"> <span id="mobile-alerts"></span>
+            <ul class="results-ul" id="results-ul">
+                <li class="results-li">
+                    <div id="instruction-card">
+                        <div id="inst-card_text">
+                            <h4>This is a prototype and is best viewed on a computer.</h4>
+                            <p>You can filter results through the left pane. Currently, only the house
+                                and course
+                                filters can be accessed. <br> On a mobile, tap the logo to open the left
+                                pane.</p>
+                            <p> If you haven't already please complete <a href="http://kyism.gq/baNM8x4Dz" target="_blank"
+                                    rel="noreferrer noopener">this form</a> to have your
+                                data registered with KYI.
+                                <br /> It only takes a minute.</p>
+                            <p>Send suggestions, complaints, compliments or even a hello at: <br /> <a
+                                    href="mailto:sayhello@kyism.ml">sayhello@kyism.ml</a>
+                            </p>
+                            <p>
+                                The Know Your ISM Blog at <a href="blog">kyism.ga/blog</a>.<br />
+                                The Know Your ISM URL Shortener at <a href="shorts">kyism.ga/shorts</a>.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <span id="install-btn" class="hidden"><i class="fa fa-plus-square-o"></i></span>
+            <span id="back_to_top"><img src="public/img/back_to_top2.png" alt=""> </span>
+            <div id="page_scrolling_buttons"> <button id="first_page">&laquo; First Page</button>
+                <button id="previous_page">&#8249; Previous</button><button id="next_page">Next
+                    &#8250;</button></div>
+        </div class="right">
+    </div>
+    </div>
+    <script src="js/globals.js"></script>
+    <script src="js/elements.js"></script>
+    <script src="js/global-listeners.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/element-listeners.js"></script>
+    <script src="js/results-ul.js"></script>
+    <script>
+        // if ('serviceWorker' in navigator) {
+        //     navigator.serviceWorker.register('service-worker.js').then(function () {
+        //         console.log(
+        //             "Know Your ISM Worker v0.3.1 installed.\nSearch responses are being cached. If there's a database update, you might have to clear your cache to get the new responses.\nLearn more on clearing cache in chrome: https://tinyurl.com/yya54xot.\nLearn more on clearing cahe in firefox: https://tinyurl.com/m6pngn5."
+        //         );
+        //     });
+        // }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations()
+            .then(function(registrations) { 
+                for(let registration of registrations) { 
+                    registration.unregister(); 
+                } 
+            });
+        }
+    </script>
+</body>
+
+</html>
