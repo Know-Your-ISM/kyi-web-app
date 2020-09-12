@@ -17,11 +17,13 @@ let $searchForm = document.querySelector(".search-form");
 let $searchBar = document.querySelector("#search-bar");
 let $searchSubmit = document.querySelector("#search-submit-btn");
 let $searchClear = document.querySelector("#search-clear-btn");
-let $searchDark = state.screenWidth > 800 ? document.querySelector("#search-dark-btn") : document.querySelector("#mobile-dark-btn");
-let $moonIcon = state.screenWidth > 800 ? document.querySelector("#moon-icon") : document.querySelector("#mobile-dark-icon");
-let $searchBkmrk = state.screenWidth > 800 ? document.querySelector("#search-bkmrk-btn") : document.querySelector("#mobile-bkmrk-btn");
-let $bkmrkIcon = state.screenWidth > 800 ? document.querySelector("#bkmrk-icon") : document.querySelector("#mobile-bkmrk-icon");
-let $alerts = state.screenWidth > 800 ? document.querySelector("#alerts") : document.querySelector("#mobile-alerts");
+let $searchDark = state.screenWidth > 820 ? document.querySelector("#search-dark-btn") : document.querySelector("#mobile-dark-btn");
+let $moonIcon = state.screenWidth > 820 ? document.querySelector("#moon-icon") : document.querySelector("#mobile-dark-icon");
+let $searchBkmrk = state.screenWidth > 820 ? document.querySelector("#search-bkmrk-btn") : document.querySelector("#mobile-bkmrk-btn");
+let $bkmrkIcon = state.screenWidth > 820 ? document.querySelector("#bkmrk-icon") : document.querySelector("#mobile-bkmrk-icon");
+let $alerts = state.screenWidth > 820 ? document.querySelector("#alerts") : document.querySelector("#mobile-alerts");
+let $mobileMenu = document.querySelector('#mobile-menu-btn');
+let $mobileMenuIcon = document.querySelector('#mobile-menu-icon');
 let $logo = document.querySelector("#logo");
 
 /* Sidebar */
@@ -37,7 +39,9 @@ let $course= document.querySelector("#course");
 let $clearFilters = document.querySelector("#clear_filters");
 
 /* Results */
-let $instructionCardText = document.querySelector("#inst-card-text")
+let $instructionCardText = document.querySelector("#inst-card-text");
+let $instructionText = document.querySelectorAll('#inst-card-text > p');
+let $introLinks = document.querySelectorAll('.intro-link');
 let $right = document.querySelector("#right");
 let $resultsUl = document.querySelector("#results-ul");
 /* .results-li > .card > ( picture > source {srcset} ) + .card_text > h4 + h5 + p; */
@@ -49,5 +53,12 @@ let $nextPage = document.querySelector("#next_page");
 let $previousPage = document.querySelector("#previous_page");
 
 /* Utilities */
-let $backToTop = document.querySelector("#back_to_top");
+let $backToTop = document.querySelector("#back_to_top img");
 let $installBtn = document.querySelector("#install-btn");
+
+/* Footer*/
+let $footer = document.querySelector('footer');
+let $cookieAgreement = document.querySelector('.cookie-agreement');
+let $cookieAgreementBtn = document.querySelector('#cookie-btn');
+let $appLinks = document.querySelector('.app-links');
+let $showAppLinks = document.querySelector('#open-app-links');

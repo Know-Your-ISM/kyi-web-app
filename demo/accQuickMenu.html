@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="accQuickmenu.css" />
+    <script
+      src="https://kit.fontawesome.com/2e5ff0971e.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="acc-quick-menu">
+      <div class="acc-img-container">
+        <img class="acc-img" src="3078.jpg" alt="" />
+      </div>
+      <div class="acc-menu">
+        <img src="3078.jpg" alt="" />
+        <h6>mohammad Hasim Ansari</h6>
+        <p>19je0530</p>
+        <!-- <p>irasnanmizaeb@gmail.com</p> -->
+        <button class="edit-acc">
+          <i class="far fa-edit"> </i> Edit Your Details
+        </button>
+        <button class="logout">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const accountIcon = document.querySelector('.acc-img-container');
+    const accountMenuHolder = document.querySelector('.acc-quick-menu');
+    const showAccMenu = function(){
+      console.log('it works?')
+      accountMenuHolder.classList.add('open-acc-menu');
+      setTimeout(()=>{accountMenuHolder.classList.add('show-acc-menu')}, 50)
+    }
+
+    accountIcon.addEventListener('click', showAccMenu); 
+  </script>
+</html>

@@ -6,8 +6,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/indexMobile.css">
+    <link rel="stylesheet" href="css/loader.css">
+    
     <link rel="shortcut icon" href="public/img/kyi_logo_2.png" type="image/x-icon">
     <link rel="manifest" crossorigin="use-credentials" href="public/manifest.json" />
+    <link href='https://fonts.googleapis.com/css?family=Armata' rel='stylesheet'>
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -37,14 +41,27 @@
     <link rel="apple-touch-icon" sizes="500x500" href="/public/img/kyi_500x500.png">
     <link rel="icon" sizes="512x512" href="/public/img/kyi_512x512.png">
     <link rel="apple-touch-icon" sizes="512x512" href="/public/img/kyi_512x512.png">
+    <link rel="stylesheet" href="css/indexDark.css">
 </head>
 
 <body>
     <div id="root">
         <div id="overlay"> <a id="overlay-close-btn">&times;</a>
             <div id="overlay-text"></div>
-            <div class="loader-wrap" id="loader-wrap">
-                <div id="loader"></div>
+             <div class="loader-wrap" id="loader-wrap">
+                 <!-- <div id="loader"></div> -->
+                 <div class="preloader-2">
+                    <span class="line line-1"></span>
+                    <span class="line line-2"></span>
+                    <span class="line line-3"></span>
+                    <span class="line line-4"></span>
+                    <span class="line line-5"></span>
+                    <span class="line line-6"></span>
+                    <span class="line line-7"></span>
+                    <span class="line line-8"></span>
+                    <span class="line line-9"></span>
+                    <div>Loading</div>
+                  </div>
             </div>
             <div id="overlay-card-wrapper">
                 <div id="overlay-card"></div>
@@ -55,15 +72,16 @@
                 <div class="modal-html"></div>
             </div>
         </div>
-        <div class="header"> <img id="logo" src="public/img/kyi_logo_2.png" alt="logo">
+        <div class="header"> <img id="logo" src="public/img/kyi_logo_2.svg" alt="logo">
             <div class="logo-text tooltip">
                 <span class="tooltiptext">The Homepage of KYI</span>
                 <span>
                     <h2 id="logo-h2">Know <span id="logo-text-your">Your</span> ISM</h2>
                 </span>
             </div>
-            <form id="search_bar_and_images" class="search-form"> <input class="search1" id="search-bar" type="text"
-                    placeholder="Name/Admission number"> 
+            <form id="search_bar_and_images" class="search-form"> <input id="search-bar" type="text"
+                placeholder="Name/Admission number"> 
+                
                 <button class="search-btn" id="search-submit-btn" type="submit"> 
                     <i class="search_images fa fa-search" id="search-icon"></i> 
                 </button> 
@@ -75,11 +93,12 @@
                 </button> 
                 <button class="search-btn" id="search-clear-btn"> <span class="search_images"> &times; </span>
                 </button>
+                <button id="mobile-menu-btn"><i class="fas fa-bars" id="mobile-menu-icon"></i></button>
                 <div class="alerts" id="alerts"></div>
             </form>
         </div>
         <div class="sidebar">
-            <form> <span class="filter_label">
+             <form> <span class="filter_label">
                     <p>Filter by:</p>
                 </span>
                 <div class="sidebar_content">
@@ -181,14 +200,17 @@
                         </select></div>
                     <div class="filter_buttons">
                         <a href="#" id="mobile-dark-btn" class="filter-btn"> <span type="button" class="fa fa-moon-o" id="mobile-dark-icon" name="mobile-dark-btn"></span></a>
-                        <a href="#" class="filter-btn"> <input type="button" id="clear_filters" name="clear_filters" value="Clear Filters"></a>
+                        <input type="button" id="clear_filters" name="clear_filters" value="Clear Filters">
                         <a href="#" id="mobile-bkmrk-btn" class="filter-btn"> <span type="button" class="fa fa-bookmark-o" id="mobile-bkmrk-icon" name="mobile-bkmrk-btn"></span></a>
                     </div>
                     <hr class="sidebar-hr" />
                     <div class="other-sites-block inline-block">
-                        <a href="blog" class="fa fa-newspaper-o tooltip other-sites"> <span class="small-text"><div>KYI BLOG</div></span><span class="tooltiptext small-text" id="blog-tooltip">The Blog</span></a>
-                        <a href="pixels" class="fa fa-picture-o tooltip other-sites"> <span class="small-text"><div>KYI PIXELS</div></span><span class="tooltiptext small-text" id="pixels-tooltip">The Photo Gallery</span> </a>
+                        <a href="http://kyism.ga/blog" target="_blank" class="fa fa-newspaper-o tooltip other-sites"> <span class="small-text"><div>KYI BLOG</div></span><span class="tooltiptext small-text" id="blog-tooltip">The Blog</span></a>
+                        <!-- <a href="locations" class="fas fa-map-marked-alt tooltip other-sites"> <span class="small-text"><div>KYI LOCATIONS</div></span><span class="tooltiptext small-text" id="locations-tooltip">Locations of Interest</span></a> -->
+                        <!-- <a href="blog" class="fas fa-utensils tooltip other-sites"> <span class="small-text"><div>KYI RESTAURANTS</div></span><span class="tooltiptext small-text" id="restaurant-tooltip">Tasty Spots</span></a> -->
+                        <!-- <a href="pixels" class="fa fa-picture-o tooltip other-sites"> <span class="small-text"><div>KYI PIXELS</div></span><span class="tooltiptext small-text" id="pixels-tooltip">The Photo Gallery</span> </a> -->
                     </div>
+                    <!-- <h7>Copyright © 2020 KYI. All Rights Reserved.</h7> -->
                 </div>
             </form>
         </div>
@@ -200,31 +222,54 @@
                             <h4>This is a prototype and is best viewed on a computer.</h4>
                             <p>You can filter results through the left pane. Currently, only the house
                                 and course
-                                filters can be accessed. <br> On a mobile, tap the logo to open the left
-                                pane.</p>
-                            <p> If you haven't already please complete <a href="http://kyism.gq/baNM8x4Dz" target="_blank"
+                                filters can be accessed.<!--<br> On a mobile, tap the logo to open the left
+                                pane.</p> -->
+                            <p> If you haven't already, please complete <a class="intro-link" href="${form_url}" target="_blank"
                                     rel="noreferrer noopener">this form</a> to have your
                                 data registered with KYI.
                                 <br /> It only takes a minute.</p>
-                            <p>Send suggestions, complaints, compliments or even a hello at: <br /> <a
+                            <p>Send suggestions, complaints, compliments or even a hello at: <br /> <a class="intro-link"
                                     href="mailto:sayhello@kyism.ml">sayhello@kyism.ml</a>
                             </p>
-                            <p>
-                                The Know Your ISM Blog at <a href="blog">kyism.ga/blog</a>.<br />
-                                The Know Your ISM URL Shortener at <a href="shorts">kyism.ga/shorts</a>.
-                            </p>
+                            <!-- <p>
+                                The Know Your ISM Blog at <a class="intro-link" href="blog">kyism.ga/blog</a>.<br />
+                                The IIT (ISM) Galleria at KYI Pixels: <a class="intro-link" href="pixels">kyism.ga/pixels</a>.
+                            </p> -->
                         </div>
                     </div>
                 </li>
             </ul>
-            <span id="install-btn" class="hidden"><i class="fa fa-plus-square-o"></i></span>
-            <span id="back_to_top"><img src="public/img/back_to_top2.png" alt=""> </span>
+            <span id="install-btn" class="hidden"><i class="fa fa-bolt"></i></span>
+            <span id="back_to_top"><img src="public/img/back_to_top2.svg" alt=""> </span>
             <div id="page_scrolling_buttons"> <button id="first_page">&laquo; First Page</button>
                 <button id="previous_page">&#8249; Previous</button><button id="next_page">Next
-                    &#8250;</button></div>
-        </div class="right">
+                    &#8250;</button>
+            </div>
+            <div class="cookie-agreement">
+                <p>We use cookies to improve your experience and support our mission.
+                     By proceeding further, you agree to our use of cookies.<button id="cookie-btn">Accept</button></p>
+            </div>
+            <footer class="footer-first-placed-at">
+                <span id="footer-options"> 
+                    <p id="#contact-us">Contact Us at: <a href="mailto:sayhello@kyism.ml">sayhello@kyism.ml</a></p> 
+                    <!-- <p><a href="http://kyism.ga/blog" target="_blank">BlogPost</a></p> -->
+                    <p id="open-app-links">Android/iOS Apps<span class="app-links">
+                        COMING SOON!
+                        <!-- <a href="http://kyism.ga/privacy" target="_blank"> --><img src="public/img/google-play.png" alt="Click here to get Android App"><!--</a> -->
+                        <!-- <a href="http://kyism.ga/privacy" target="_blank"> --><img src="public/img/app-store.png" alt="Click here to get the iOS App"><!-- </a> -->
+                    </span></p>
+                    <span class="document-links">
+                    <p><a href="http://kyism.ga/privacy" target="_blank">•Privacy Policy</a></p>
+                    <p><a href="http://kyism.ga/terms_and_conditions" target="_blank">•Terms</a></p>
+                    <!-- <p><a href="http://kyism.ga/privacy" target="_blank">•Disclaimer</a></p> -->
+                    </span>
+                </span>
+                
+            </footer>
+            
+        </div>
     </div>
-    </div>
+    
     <script src="js/globals.js"></script>
     <script src="js/elements.js"></script>
     <script src="js/global-listeners.js"></script>
@@ -232,23 +277,15 @@
     <script src="js/utils.js"></script>
     <script src="js/element-listeners.js"></script>
     <script src="js/results-ul.js"></script>
+    <script src="https://kit.fontawesome.com/2e5ff0971e.js" crossorigin="anonymous"></script>
     <script>
         // if ('serviceWorker' in navigator) {
         //     navigator.serviceWorker.register('service-worker.js').then(function () {
         //         console.log(
-        //             "Know Your ISM Worker v0.3.1 installed.\nSearch responses are being cached. If there's a database update, you might have to clear your cache to get the new responses.\nLearn more on clearing cache in chrome: https://tinyurl.com/yya54xot.\nLearn more on clearing cahe in firefox: https://tinyurl.com/m6pngn5."
+        //             "Know Your ISM Service Worker on v1.\nSearch responses are being cached. If there's a database update, you might have to clear your cache to get the new responses.\nLearn more on clearing cache in chrome: https://tinyurl.com/yya54xot.\nLearn more on clearing cahe in firefox: https://tinyurl.com/m6pngn5."
         //         );
         //     });
         // }
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations()
-            .then(function(registrations) { 
-                for(let registration of registrations) { 
-                    registration.unregister(); 
-                } 
-            });
-        }
     </script>
 </body>
 

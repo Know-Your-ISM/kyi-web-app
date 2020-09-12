@@ -1,5 +1,5 @@
 /* Utils functions. */
-const runUserVerf = async () => {
+const runUserVerf = () => {
     document.querySelector("#usr-verf-form").addEventListener("submit", async (event) => {
         event.preventDefault();
         if (document.querySelector("#usr-verf-input").value === "") {
@@ -9,23 +9,23 @@ const runUserVerf = async () => {
         launchLoader();
         let admno = document.querySelector("#usr-verf-input").value;
         try {
-            modifyCurrentModal(`<h3 style="width:100%;text-align:center;color:black;">Hang on! This won't be long.</h3>`);
             let student = await fetchOneStudent({ "Admission No": admno });
             closeLoader();
             if (student && student.status === "Verified") {
                 modifyCurrentModal(`<h3 style="width:100%;text-align:center;color:green;">Welcome, ${student.student.Name}!</h3>`);
                 state.User = student.student;
-                lwrite("kyi-User", JSON.stringify(student.student));
+                console.log(state);
+                default_alert = state.User.Name;
+                cookieFunction();
                 setTimeout(() => {
                     closeModal();
-                    toggleForm("enable");
-                    $searchBar.focus();
+                    showAlert(default_alert);
+                    if(state.screenWidth > 820) $searchBar.focus();
                 }, 1200);
             } 
             else {
                 state.verf_attempt -= 1;
                 if (state.verf_attempt > 0) {
-                    launchUserVerfModal();
                     document.querySelector("#usr-verf-input").value = "";
                     document.querySelector("#usr-verf-input").setAttribute("placeholder", "Incorrect Admission Number!");
                 } else {
@@ -43,23 +43,20 @@ const runUserVerf = async () => {
     });
 }
 
-const launchUserVerfModal = function() {
-    launchModal(userVerf, true);
-    document.querySelector("#usr-verf-input").focus();
-    toggleForm("disable");
-}
-
-const startUserVerf = async function() {
-    launchUserVerfModal();
-    await runUserVerf();
-}
-
-const readUserFromLs = () => {
-    let user = JSON.parse(lread("kyi-User"));
-    state.User = JSON.parse(lread("kyi-User"));
-    default_alert = `<span class="alert-user-name">${user}</span>` 
-        || Object.keys(state.User).length > 0 ? `<span class="alert-user-name">${state.User.Name}</span>` : "";
-}
+function debounce(func, wait = 10, immediate = true) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  }
 
 const switchPlaceholder = () => {
     let names = ["Mihir", "Mohit", "Pawan", "Hasim", "Nitin", "Neel", "Nayan", "your name"];
@@ -142,8 +139,6 @@ const submitQuery = async (page) => {
     let input = $searchBar.value;
     let pageNumber = page || 1;
 
-    if (input !== "") state.lastQuery = input;
-
     // Close bookmarks.
     hideBookmarks();
 
@@ -216,10 +211,31 @@ const scrollToTop = () => {
 }
 
 const ifMobileCloseSidebar = () => {
-    if (state.screenWidth < 800) {
-        $sidebar.style.display = "none";
-        $sidebarContent.style.display = "none";
+    if (state.screenWidth < 820) {
+        $sidebar.style.left = '100%';
+        $sidebarContent.style.left = '100%';
         $right.style.display = "block";
+        state.filters = "closed";
+    }
+}
+
+const filterDisplay = () => {
+    if (state.screenWidth < 820 && state.filters === "closed") {
+        $sidebar.style.left = '0';
+        $sidebar.style.top = "80px";
+        $sidebar.style.width = "100vw";
+        $sidebarContent.style.left = '0';
+        $sidebarContent.style.top = "80px";
+        $sidebarContent.style.width = "100vw";
+        $sidebarContent.style.overflowY = 'auto';
+        state.filters = "open";
+    } else if (state.screenWidth < 820 && state.filters === "open") {
+        $sidebar.style.left = '100%';
+        $sidebar.style.top = "80px";
+        $sidebar.style.width = "0";
+        $sidebarContent.style.left = '100%';
+        $sidebarContent.style.width = "0";
+        $sidebarContent.style.overflowY = 'hidden';
         state.filters = "closed";
     }
 }
@@ -230,16 +246,39 @@ const runSubmit = async (ev) => {
     launchLoader();
     let results = await submitQuery(1);
     loadResults(results);
+    footerAndBackToTopDisplay(results);
     toggleForm("enable");
     ifMobileCloseSidebar();
     closeLoader();
-    if (state.lastQuery && yourname.test(state.lastQuery)) {
-        setNiceTry();
-    }
     if (results === null || results === []) {
         setTimeout(() => {
             showAlert(default_alert);
         }, 3000);
+    }
+}
+
+const footerAndBackToTopDisplay = (results) =>{
+    if(results !== null || results === []){
+        $footer.classList.remove('footer-first-placed-at');
+        // $backToTop.style.display = 'flex';
+    }
+    
+    // if($right.style.height < ''){
+    //     $footer.classList.add('footer-first-placed-at');
+    //     $backToTop.style.display = 'none';
+    //     console.log('it aint right');
+    // }
+}
+
+const showBackToTop = function(){
+    if(window.scrollY > '350'){
+        $backToTop.style.display = 'flex';
+        $backToTop.style.right = '25px';
+        
+        // console.log('company')
+    }
+    else{
+        $backToTop.style.right = '-20%';
     }
 }
 
@@ -276,30 +315,46 @@ const toggleColorScheme = () => {
 }
 
 const colorScheme = (scheme) => {
-    if (scheme === "dark") {
-        $header.style.background = "rgb(50, 50, 50)";
-        $sidebarContent.style.background = "grey";
-        document.body.style.background = "rgb(50, 50, 50)";
-    } else if (scheme === "light") {
-        $header.style.background = "white";
-        $sidebarContent.style.background = "#4885ed";
-        document.body.style.background = "lightgrey";
-    }
-}
+        $header.classList.toggle('header-dark');
+        document.body.classList.toggle('body-dark');
+        
+        $alerts.classList.toggle('alerts-dark');
+        $searchBkmrk.classList.toggle('searchbtns-dark');
+        $searchSubmit.classList.toggle('searchbtns-dark');
+        $searchDark.classList.toggle('searchbtns-dark');
 
-const loadFullCard = (html) => {
-    loadResults(null, html);
-}
+        if(scheme === 'dark'){
+            $sidebarContent.style.background = 'linear-gradient(to left, grey 60%, #90a4ae)';
+            $overlay.style.background = 'rgba(241, 232, 232, 0.438)';
+            document.querySelectorAll('.card').forEach(card => card.classList.add('card-dark'));
+            document.querySelectorAll('.card').forEach(card => card.style.borderBottom = '1px solid rgb(136, 112, 112)');
+            $introLinks.forEach(introLink => introLink.style.color = '#60b0da');
+            $alerts.style.color = '#ccc';
+            $mobileMenu.style.background = 'rgb(77,77,77)';
+            $footer.style.background = '#292929b7';
+        }else{
+            $sidebarContent.style.background = 'linear-gradient(to left, #23a1db 60%, #7ec3ff ';
+            $overlay.style.background = '#ffffffb4';
+            document.querySelectorAll('.card').forEach(card => card.classList.remove('card-dark'));
+            document.querySelectorAll('.card').forEach(card => card.style.borderBottom = '1px solid snow');
+            // $introLinks.style.color = 'rgb(71, 71, 212)';
+            $introLinks.forEach(introLink => introLink.style.color = 'rgb(71, 71, 212)');
+            $alerts.style.color = '#323232';
+            $mobileMenu.style.background = 'white';
+            $footer.style.background = '#f8f8f8';
+        }
+    }
 
 const lread = (key) => {
+    // return localStorage.getItem(key);
     let value = localStorage.getItem(key);
-    if (!value) {
+    if(!value){
         return value;
     }
-    try {
+    try{
         let value2 = atob(value);
         return value2;
-    } catch(e) {
+    } catch(e){
         return value;
     }
 }
@@ -341,6 +396,10 @@ const showBookmarks = () => {
     
     if (readList.length === 0) {
         showAlert("No bookmarks!");
+    // }// 
+    // else if(state.bookmarks.open === true) {
+    //     hideBookmarks();
+    // }
     } else {
         loadResults(readList);
         showAlert(`${readList.length} ${readList.length > 1 ? 'bookmarks' : 'bookmark'}`);
@@ -354,14 +413,11 @@ const hideBookmarks = () => {
     state.bookmarks.open = false;
     $bkmrkIcon.classList.remove("fa-bookmark");
     $bkmrkIcon.classList.add("fa-bookmark-o");
+
 }
 
 const refreshStateLsKeys = () => {
     state.ls_keys = ls_keys();
-}
-
-const setNiceTry = () => {
-    showAlert(`Nice Try!`);
 }
 
 // const addBookmark = (student) => {
@@ -409,7 +465,7 @@ const toggleBookmark = (student) => {
     if (state.ls_keys.includes(ls_create_key(student._id))) {
         removeBookmark(student._id);
         return "removed";
-    } else {
+    } else{
         addBookmark(student);
         return "added";
     }
@@ -417,4 +473,47 @@ const toggleBookmark = (student) => {
 
 const ls_create_key = (id) => {
     return "kyi_" + id;
+}
+
+const closebtnToggle = function(e){
+    if ($searchBar.value === ""){
+        $searchClear.style.visibility = 'hidden';
+        $searchClear.style.opacity = '0';
+    } else{
+        $searchClear.style.visibility = 'visible';
+        $searchClear.style.opacity = '1';
+    }
+}
+
+const showAppLinks = function(){
+    $appLinks.style.visibility = 'visible';
+    $appLinks.style.opacity = '1';
+}
+const hideAppLinks = function(){
+    $appLinks.style.visibility = 'hidden';
+    $appLinks.style.opacity = '0';
+}
+const hideAppLinksOnMobile = function(e){
+    if(e.target !== $showAppLinks && $appLinks.style.opacity === '1'){
+        $appLinks.style.visibility = 'hidden';
+        $appLinks.style.opacity = '0';
+    }
+}
+
+const displayCookieBar = () => {
+    $cookieAgreement.style.bottom = 0;
+    setTimeout(() => {
+        $cookieAgreement.style.bottom = '-100%';    
+    }, 30000)
+}
+
+const cookieFunction = () => {
+    let potasticCrusaders = JSON.parse(lread('kyiCookieCheck'));
+    if(typeof potasticCrusaders === 'object'){
+        lwrite('kyiCookieCheck', false);
+        potasticCrusaders = false;
+    }
+    if(potasticCrusaders === false){
+        displayCookieBar();
+    }
 }

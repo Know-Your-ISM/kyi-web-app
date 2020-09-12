@@ -1,11 +1,11 @@
 /* Global event listeners. */
-window.onload = async () => {
-    if (!lread("kyi-User")) {
-        await startUserVerf();
-    } else {
-        readUserFromLs();
+window.onload = () => {
+    launchModal(userVerf, true);
+    if(window.innerWidth > 820) {
+        document.querySelector("#usr-verf-input").focus();
     }
-    showAlert(default_alert);
+    // console.log(window.innerWidth)
+    runUserVerf();
     switchPlaceholder();
     state.ls_keys = ls_keys();
 }
@@ -42,3 +42,8 @@ $installBtn.addEventListener('click', () => {
 window.addEventListener('appinstalled', (event) => {
    showAlert("App installed!");
 });
+
+
+
+
+// window.addEventListener('scroll', shift)

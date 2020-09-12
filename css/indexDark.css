@@ -1,0 +1,24 @@
+.header-dark{
+  background: rgb(77, 77, 77);
+}
+
+.body-dark{
+  background: linear-gradient(to bottom, #39393a, #4d4d4d, #6e6e6e);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+.alerts-dark{
+  color: #ebebeb;
+}
+
+.searchbtns-dark:hover{
+  border: 3.5px solid rgb(74, 201, 131);
+}
+
+.card-dark:hover{
+  background: rgb(230, 228, 228);
+  box-shadow: 2px 3px 7px #b1a2a2;
+  border: 1px solid #c4c4c4;
+}
