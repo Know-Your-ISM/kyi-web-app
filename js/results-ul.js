@@ -1,28 +1,10 @@
-const loadResults = (results, fullCard) => {
+const loadResults = (results) => {
     if (!results) return;
     clearResults();
     scrollToTop();
 
-    if (fullCard) {
-        let li = document.createElement('li');
-        li.setAttribute('class', 'results-li');
-        li.setAttribute('id', 'full-card-li');
-
-        $resultsUl.appendChild(li);
-
-        console.log("happened");
-
-        return li.innerHTML = `
-        <div id="instruction-card">
-            <div id="inst-card_text">
-                ${fullCard}
-            </div>
-        </div>
-        `;
-    }
     if (results.length <= 0) {
         showAlert('No results to show! <br /> Try shortening your keyword.');
-        loadResults(null, `Oops! No results to show.`);
     }
     else {
         let i = 0;
@@ -51,7 +33,10 @@ const insertResult = (result, i) => {
 
     li.setAttribute("class", "results-li");
     li.setAttribute("id", i);
-
+    if(state.scheme === 'dark'){
+        document.querySelectorAll('.card').forEach(card => card.classList.add('card-dark'));
+        document.querySelectorAll('.card').forEach(card => card.style.borderBottom = '1px solid rgb(136, 112, 112)');
+    };
     card.setAttribute("class", "card");
     card_text.setAttribute("class", "card_text");
 
@@ -98,6 +83,7 @@ const insertResult = (result, i) => {
     // });
 
     bkmrk_btn.addEventListener("click", (e) => {
+        e.stopPropagation()
         let effect = toggleBookmark(result);
         if (effect === "removed") {
             bkmrk_btn.classList.remove("fa", "fa-star", "result-bkmrk-btn");
@@ -153,4 +139,5 @@ const insertResult = (result, i) => {
     });
 
     $resultsUl.appendChild(li);
+
 }

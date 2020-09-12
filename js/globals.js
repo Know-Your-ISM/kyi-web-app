@@ -6,9 +6,9 @@ let male_image = "public/img/male.png";
 let female_image = "public/img/female.png";
 let beard_image = "public/img/man_beard.jpg";
 let photo = `https://kyi.herokuapp.com/api/students/avatar`;
-let form_url = `http://kyism.gq/baNM8x4Dz`;
+let form_url = `https://forms.gle/MPTtLhE9PQVXZQQ29`;
 let ls_key = "kyi-bkmrks_list";
-let yourname = / ?your ?name ?/i;
+// let yourname = / ?your ? name ?/i;
 
 /* State */
 let state = {
@@ -41,9 +41,10 @@ Hang on for the Native Android and iOS apps. They'll be in the respective app ma
 Also, soon, this data will be accessible via our API for use in your own apps.
 </div>
 <p class="usr-verf-explaination">Send suggestions, complaints, compliments or even a hello at: <br /> <a href="mailto:sayhello@kyism.ml" target="_blank" rel="noreferrer noopener">sayhello@kyism.ml</a></p>
-</div>`;
+</div>
+<p class="usr-verf-links"><a href="https://kyism.ga/disclaimer" target="_blank">•Disclaimer</a> <a href="https://kyism.ga/privacy" target="_blank">•Privacy Policy</a> <a href="https://kyism.ga/terms_and_conditions" target="_blank">•Terms and Conditions</a></p>`;
 
-let default_alert = Object.keys(state.User).length > 0 ? `<span class="alert-user-name">${state.User.Name}</span>` : "";
+let default_alert = Object.keys(state.User).length > 0 ? `<span>${state.User.Name}</span>` : "";
 
 /*
 <p class="usr-verf-explaination">Imagine being able to identify every senior you come across...<br /> With <b>Know Your ISM</b>, that's exactly what you'll be able to do. </p> 
